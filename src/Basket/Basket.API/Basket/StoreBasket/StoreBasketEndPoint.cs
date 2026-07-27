@@ -20,11 +20,11 @@ namespace Basket.API.Basket.StoreBasket
                     var response = result.Adapt<StoreBasketResponse>();
                     return Results.Created($"/basket/{response.UserName}", response);
                 })
-                .WithName("CreateProduct")
+                .WithName("StoreBasket")
                 .Produces<StoreBasketResponse>(StatusCodes.Status201Created)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
-                .WithSummary("Crear Producto")
-                .WithDescription("Crear Producto");
+                .WithSummary("Guardar carrito")
+                .WithDescription("Guarda o actualiza el carrito de compras de un usuario.");
             }
         }
     }
