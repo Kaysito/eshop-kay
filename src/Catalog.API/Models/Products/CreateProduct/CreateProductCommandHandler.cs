@@ -1,6 +1,6 @@
 ﻿namespace Catalog.API.Models.Products.CreateProduct
 {
-    public record CreateProductCommand(string Name, string Description,List<string> Category,string ImagesFiles,decimal Price)
+    public record CreateProductCommand(string Name, string Description,List<string> Category,string ImagesFiles,decimal Price, string ImageUrl = default)
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
     internal class CreateProductCommandHandler(IDocumentSession documentSession): ICommandHandler<CreateProductCommand, CreateProductResult>
@@ -13,6 +13,7 @@
                 Descripcion = request.Description,
                 Category = request.Category,
                 ImageFiles = request.ImagesFiles,
+                ImageUrl = request.ImageUrl,
                 Price = request.Price
             };
             documentSession.Store(product);

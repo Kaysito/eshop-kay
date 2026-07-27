@@ -8,7 +8,8 @@ namespace Catalog.API.Models.Products.UpdateProduct
         string Description,
         List<string> Category,
         string ImagesFiles,
-        decimal Price) : ICommand<UpdateProductResult>;
+        decimal Price,
+        string ImageUrl = default) : ICommand<UpdateProductResult>;
 
     public record UpdateProductResult(bool IsSuccess);
 
@@ -27,6 +28,7 @@ namespace Catalog.API.Models.Products.UpdateProduct
             product.Descripcion = command.Description;
             product.Category = command.Category;
             product.ImageFiles = command.ImagesFiles;
+            product.ImageUrl = command.ImageUrl;
             product.Price = command.Price;
 
             session.Update(product);
