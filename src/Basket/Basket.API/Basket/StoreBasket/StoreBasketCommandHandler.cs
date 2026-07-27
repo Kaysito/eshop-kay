@@ -27,6 +27,7 @@ namespace Basket.API.Basket.StoreBasket
         public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
         {
             ShoppingCart cart = command.Cart;
+            cart.UserName = cart.UserName?.Trim().Replace(" ", "_");
             await repository.StoreBasket(cart, cancellationToken);
             return new StoreBasketResult(cart.UserName);
         }

@@ -11,7 +11,8 @@ namespace Basket.API.Basket.GetBasket
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
         {
-            var basket = await repository.GetBasket(query.UserName);
+            var sanitizedUserName = query.UserName?.Trim().Replace(" ", "_");
+            var basket = await repository.GetBasket(sanitizedUserName);
             return new GetBasketResult(basket);
         }
     }
