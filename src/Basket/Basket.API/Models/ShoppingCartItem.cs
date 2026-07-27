@@ -7,5 +7,7 @@
         public decimal Price { get; set; } = default!;
         public Guid ProductId { get; set; } = default!;
         public string ProductName { get; set; } = default!;
+        public string ImageFile { get; set; } = default!;
+        public string ImageUrl { get; set; } = default!;
     }
 }
