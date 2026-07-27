@@ -1,8 +1,6 @@
-[phases.setup]
-nixPkgs = ["dotnet-sdk-9_0"]
+[build]
+builder = "NIXPACKS"
+buildCommand = "dotnet build src/Catalog.API/Catalog.API.csproj -c Release"
 
-[phases.build]
-cmds = ["dotnet build src/Catalog.API/Catalog.API.csproj -c Release"]
-
-[start]
-cmd = "dotnet run --project src/Catalog.API/Catalog.API.csproj --urls http://0.0.0.0:8080"
+[deploy]
+startCommand = "dotnet run --project src/Catalog.API/Catalog.API.csproj --urls http://0.0.0.0:8080"
