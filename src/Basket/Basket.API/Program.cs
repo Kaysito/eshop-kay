@@ -35,9 +35,12 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Frontend", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [])
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "https://lambent-torrone-969915.netlify.app"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -48,7 +51,7 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-app.UseCors("Frontend");
+app.UseCors("AllowFrontend");
 
 app.MapCarter();
 app.UseExceptionHandler(options => { });
