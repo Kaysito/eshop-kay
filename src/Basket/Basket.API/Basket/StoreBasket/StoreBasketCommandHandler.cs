@@ -6,12 +6,18 @@ namespace Basket.API.Basket.StoreBasket
 {
     public record StoreBasketCommand(ShoppingCart Cart) : ICommand<StoreBasketResult>;
     public record StoreBasketResult(string UserName);
-    public class StoreBasketCommandvalidator : AbstractValidator<StoreBasketCommand>
+    public class StoreBasketCommandValidator : AbstractValidator<StoreBasketCommand>
     {
-        public StoreBasketCommandvalidator()
+        public StoreBasketCommandValidator()
         {
-            RuleFor(x => x.Cart).NotNull().WithMessage("El Carrito no puede ser nulo.");
-            RuleFor(x => x.Cart.UserName).NotEmpty().WithMessage("El nombre del usuario es requerido.");
+            RuleFor(x => x.Cart)
+                .NotNull().WithMessage("Cart cannot be null.");
+
+            When(x => x.Cart != null, () =>
+            {
+                RuleFor(x => x.Cart.UserName)
+                    .NotEmpty().WithMessage("UserName is required.");
+            });
         }
     }
 
